@@ -39,24 +39,43 @@
         <ul></ul>
       </nav>
       <section>
-        <h2>EASY metadata as Linked Open Data demo</h2>
+        <h2>EASY Metadata as Linked Open Data Demo</h2>
 
-<h3>SPARQL endpoint</h3>
+<h3>Motivation</h3>
 
-<p><a href="http://dydra.com/cgueret/easy-lod/sparql">http://dydra.com/cgueret/easy-lod/sparql</a></p>
+<ul>
+<li>Generate an RDF dump of EASY metadata.</li>
+<li>Show off flexibility of SPARQL queries.</li>
+<li>Investigate issues related to publishing metadata as LOD.</li>
+</ul><h3>Status</h3>
 
-<h3>Cool Demo</h3>
+<p>This is a quick and dirty demo. Choices made are motivated by
+the speed of implementation, nothing is guaranteed to work,
+everything is likely to change.</p>
 
-<div id="sgvzl_example1"
-      data-sgvizler-endpoint="http://sws.ifi.uio.no/sparql/npd"
-      data-sgvizler-query="SELECT ?class (count(?instance) AS ?noOfInstances)
-                          WHERE{ ?instance a ?class }
-                          GROUP BY ?class
-                          ORDER BY ?class"
-      data-sgvizler-chart="gPieChart"
-      style="width:800px; height:400px;"></div> 
-      
+<h3>Implementation</h3>
 
+<p>OAI-PMH endpoint <a href="http://easy.dans.knaw.nl/oai/">http://easy.dans.knaw.nl/oai/</a> is used without
+authentication to harvest metadata and store it in n-triples format.</p>
+
+<p>The metadata is expressed using DCMI Metadata Terms as in the original
+dataset. Datasets are identified by OAI-PMH header identifier, and all
+values are interpreted as Dutch literals.</p>
+
+<p>See <code>dump.py</code> for details.</p>
+
+<h3>Obtaining the Data</h3>
+
+<p>There are several ways to get the data. </p>
+
+<ul>
+<li>Generate a new metadata dump run <code>python dump.py</code>.</li>
+<li>Download the dump from <a href="http://goo.gl/IOSmC">http://goo.gl/IOSmC</a>
+</li>
+<li>Use the public SPARQL endpoint <a href="http://dydra.com/cgueret/easy-lod/sparql">http://dydra.com/cgueret/easy-lod/sparql</a> </li>
+</ul><h3>Licence</h3>
+
+<p>TBC</p>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/cmarat">cmarat</a></p>
