@@ -7,38 +7,37 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
+    <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   </head>
   <body>
-
-      <header>
-        <h1>Easy-lod</h1>
-        <p></p>
-      </header>
-
-      <div id="banner">
-        <span id="logo"></span>
-
-        <a href="https://github.com/cmarat/easy-lod" class="button fork"><strong>View On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/cmarat/easy-lod/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/cmarat/easy-lod/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/cmarat/easy-lod">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/cmarat/easy-lod/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/cmarat/easy-lod/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
     <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
+
       <section>
+        <div id="title">
+          <h1>Easy-lod</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/cmarat">cmarat</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
         <h2>EASY Metadata as Linked Open Data Demo</h2>
 
 <h3>Motivation</h3>
@@ -55,32 +54,41 @@ everything is likely to change.</p>
 
 <h3>Implementation</h3>
 
-<p>OAI-PMH endpoint <a href="http://easy.dans.knaw.nl/oai/">http://easy.dans.knaw.nl/oai/</a> is used without
+<p>OAI-PMH endpoint <a href="http://easy.dans.knaw.nl/oai/">http://easy.dans.knaw.nl/oai/</a> was used without
 authentication to harvest metadata and store it in n-triples format.</p>
 
 <p>The metadata is expressed using DCMI Metadata Terms as in the original
 dataset. Datasets are identified by OAI-PMH header identifier, and all
 values are interpreted as Dutch literals.</p>
 
-<p>See <code>dump.py</code> for details.</p>
+<p>See <a href="http://github.com/cmarat/easy-lod/blob/master/dump.py">dump.py</a> for details.</p>
 
 <h3>Obtaining the Data</h3>
 
-<p>There are several ways to get the data. </p>
+<p>There are several ways to get the data: </p>
 
 <ul>
 <li>Generate a new metadata dump run <code>python dump.py</code>.</li>
 <li>Download the dump from <a href="http://goo.gl/IOSmC">http://goo.gl/IOSmC</a>
 </li>
 <li>Use the public SPARQL endpoint <a href="http://dydra.com/cgueret/easy-lod/sparql">http://dydra.com/cgueret/easy-lod/sparql</a> </li>
-</ul><h3>Licence</h3>
+</ul><h3>SPARQL Endpoint</h3>
+
+<p>EASY metadata is loaded into a Dydra triplestore and available via
+<a href="http://dydra.com/cgueret/easy-lod/sparql">http://dydra.com/cgueret/easy-lod/sparql</a>. </p>
+
+<p>Example queries:</p>
+
+<ul>
+<li><a href="http://goo.gl/PNVto">Top 20 subjects describing EASY datasets</a></li>
+<li><a href="http://goo.gl/JO5o0">Datasets related to Amsterdam</a></li>
+</ul><p>See <a href="http://dydra.com/cgueret/easy-lod/sparql">http://dydra.com/cgueret/easy-lod/sparql</a> for more examples.</p>
+
+<h3>Licence</h3>
 
 <p>TBC</p>
       </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/cmarat">cmarat</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
-      </footer>
+
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
