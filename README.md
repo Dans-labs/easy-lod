@@ -43,6 +43,6 @@ Example queries:
 
 See http://dydra.com/cgueret/easy-lod/sparql for more examples.
 
-### Licence
+### License
 
 TBC
