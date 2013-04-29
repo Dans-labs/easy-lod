@@ -21,7 +21,7 @@ The metadata is expressed using DCMI Metadata Terms as in the original
 dataset. Datasets are identified by OAI-PMH header identifier, and all
 values are interpreted as Dutch literals.
 
-See `dump.py` for details.
+See http://github.com/cmarat/easy-lod/blob/master/dump.py for details.
 
 ### Obtaining the Data
 
