@@ -31,6 +31,17 @@ There are several ways to get the data.
 - Download the dump from http://goo.gl/IOSmC
 - Use the public SPARQL endpoint http://dydra.com/cgueret/easy-lod/sparql 
 
+### SPARQL Endpoint
+
+EASY metadata is loaded into a Dydra triplestore and available via
+http://dydra.com/cgueret/easy-lod/sparql. 
+
+####Example queries 
+- Top 20 subjects describing EASY datasets: http://goo.gl/PNVto
+- Datasets related to Amsterdam: http://goo.gl/JO5o0
+
+See http://dydra.com/cgueret/easy-lod/sparql for more examples.
+
 ### Licence
 
 TBC
