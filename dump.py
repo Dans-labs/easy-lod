@@ -17,6 +17,5 @@ for header, metadata, _ in client.listRecords(metadataPrefix='oai_dc'):
 				graph.add((s, dc11[p], Literal(v, lang = 'nl')))  # assume all values are Dutch literals. that's wrong.
 	except Exception as e:
 	 	failures += 1
-
-graph.serialize('easy-lod.ttl', format='turtle')
+graph.serialize('easy-lod.nt', format='nt')
 print "Dump complete with {0} failures.".format(failures)
