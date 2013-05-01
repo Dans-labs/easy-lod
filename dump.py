@@ -10,7 +10,7 @@ graph.namespace_manager.bind('dc11', 'http://purl.org/dc/elements/1.1/')
 dc11 = Namespace('http://purl.org/dc/elements/1.1/')
 failures = 0
 for header, metadata, _ in client.listRecords(metadataPrefix='oai_dc'):
-  try:
+	try:
 		s = URIRef(header.identifier())  # use oai header identifier as subject.
 		for p, vv in metadata.getMap().iteritems():
 			for v in vv:
