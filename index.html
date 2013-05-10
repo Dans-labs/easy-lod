@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="stylesheets/ie.css">
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!-- sgvizler -->
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript" id="sgvzlr_script" src="http://sgvizler.googlecode.com/svn/release/0.5/sgvizler.js"></script>
+        <script type="text/javascript">sgvizler.option.namespace.npd = 'http://sws.ifi.uio.no/npd/'; $(document).ready(sgvizler.go());</script>
+    <!-- sgvizler -->
 
   </head>
   <body>
@@ -66,9 +71,19 @@ EASY metadata is available via the public
 <ul>
 <li><a href="http://goo.gl/PNVto">Top 20 subjects describing EASY datasets</a></li>
 <li><a href="http://goo.gl/JO5o0">Datasets related to Amsterdam</a></li>
-</ul><p>For more examples see <a href="http://dydra.com/cgueret/easy-lod/sparql">http://dydra.com/cgueret/easy-lod/sparql</a>.</p>
+</ul>
 
-<h4>Implementation details</h4>
+<p>This chart
+<div align="center">
+  <div id="sgvzl_example_query" data-sgvizler-endpoint="http://lod-danslabs.rhcloud.com/openrdf-sesame/repositories/easy-lod" data-sgvizler-query="SELECT ?subject (count(?d) as ?n) {?d <http://purl.org/dc/elements/1.1/subject> ?subject} GROUP BY ?subject ORDER BY DESC(?n) LIMIT 20" data-sgvizler-chart="gPieChart" data-sgvizler-loglevel="2" data-sgvizler-chart-options="backgroundColor=transparent|is3D=true|legend.textStyle.color=white" data-sgvizler-loglevel="2" style="width:600px; height:350px;"></div>
+</div>
+shows results of the "Top 20 subjects" query. The query is executed every time you load this page, so if you do not
+see a pie chart, this probably means that the SPARQL endpoint is down.
+</p>
+
+<!-- <p>For more examples see <a href="http://dydra.com/cgueret/easy-lod/sparql">http://dydra.com/cgueret/easy-lod/sparql</a>.</p>
+ -->
+<h3>Implementation details</h3>
 
 <p>To harvest metadata we use the public EASY OAI-PMH
 <a href="http://easy.dans.knaw.nl/oai/">endpoint</a>
