@@ -77,7 +77,7 @@ EASY metadata is available via the public
 
 <p>This chart
 <div align="center">
-  <div id="sgvzl_example_query" data-sgvizler-endpoint="http://ns3096228.ovh.net:8890/sparql" data-sgvizler-query="SELECT ?subject (count(?d) as ?n) {?d <http://purl.org/dc/elements/1.1/subject> ?subject} GROUP BY ?subject ORDER BY DESC(?n) LIMIT 20" data-sgvizler-chart="gPieChart" data-sgvizler-loglevel="2" data-sgvizler-chart-options="backgroundColor=transparent|is3D=true|legend.textStyle.color=white" data-sgvizler-loglevel="2" style="width:600px; height:350px;"></div>
+  <div id="sgvzl_example_query" data-sgvizler-endpoint="http://ns3096228.ovh.net/sparql" data-sgvizler-query="SELECT ?subject (count(?d) as ?n) {?d <http://purl.org/dc/elements/1.1/subject> ?subject} GROUP BY ?subject ORDER BY DESC(?n) LIMIT 20" data-sgvizler-chart="gPieChart" data-sgvizler-loglevel="2" data-sgvizler-chart-options="backgroundColor=transparent|is3D=true|legend.textStyle.color=white" data-sgvizler-loglevel="2" style="width:600px; height:350px;"></div>
 </div>
 shows results of the "Top 20 subjects" query. The query is executed every time you load this page, so if you do not
 see a pie chart, this probably means that the SPARQL endpoint is down.
