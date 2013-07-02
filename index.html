@@ -73,7 +73,12 @@ everything is likely to change.</p>
 <li><a href="http://goo.gl/Qerku">Datasets around Maastricht, missing coverage metadata</a></li>
 </ul>
 
-<p>Bookmarklet<a href=javascript:(function(){var query="SELECT ?dataset (SAMPLE(?t) AS ?title) (STR(MIN(bif:st_distance(?g, ?g2))) AS ?distance_km) {<datasetURI> geo:geometry ?g. ?dataset geo:geometry ?g2; dc:title ?t . FILTER(bif:st_intersects (?g2, ?g, 30))}GROUP BY ?dataset ORDER BY ?distance_km LIMIT 10";query=encodeURIComponent(query.replace("datasetURI",location.href.match("https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:[0-9]+")[0]));location.href="http://ns3096228.ovh.net:8080/sparql?query="+query})();>EASYnear</a></p>
+<p>For datasets containing geographical coordinates in metadata you can use EASYnear bookmarklet 
+from the dataset page to get a list of 10 geographically close datasets. To install the bookmarklet drag
+this link 
+<a href="javascript:(function()%7Bvar%20query%3D%22SELECT%20%3Fdataset%20(SAMPLE(%3Ft)%20AS%20%3Ftitle)%20(STR(MIN(bif:st_distance(%3Fg,%20%3Fg2)))%20AS%20%3Fdistance_km)%20%7B%3CdatasetURI%3E%20geo:geometry%20%3Fg.%20%3Fdataset%20geo:geometry%20%3Fg2%3B%20dc:title%20%3Ft%20.%20FILTER(bif:st_intersects%20(%3Fg2,%20%3Fg,%2030))%7DGROUP%20BY%20%3Fdataset%20ORDER%20BY%20%3Fdistance_km%20LIMIT%2010%22%3Bquery%3DencodeURIComponent(query.replace(%22datasetURI%22,location.href.match(%22https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:%5B0-9%5D%2B%22)%5B0%5D))%3Blocation.href%3D%22http://ns3096228.ovh.net:8080/sparql%3Fquery%3D%22%2Bquery%7D)()%3B">EASYnear</a>
+ to the bookmark bar in your browser.  
+</p>
 
 <p>This chart
 <div align="center">
