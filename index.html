@@ -73,6 +73,8 @@ everything is likely to change.</p>
 <li><a href="http://goo.gl/Qerku">Datasets around Maastricht, missing coverage metadata</a></li>
 </ul>
 
+<p>Bookmarklet<a href=javascript:(function(){var query="SELECT ?dataset (SAMPLE(?t) AS ?title) (STR(MIN(bif:st_distance(?g, ?g2))) AS ?distance_km) {<datasetURI> geo:geometry ?g. ?dataset geo:geometry ?g2; dc:title ?t . FILTER(bif:st_intersects (?g2, ?g, 30))}GROUP BY ?dataset ORDER BY ?distance_km LIMIT 10";query=encodeURIComponent(query.replace("datasetURI",location.href.match("https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:[0-9]+")[0]));location.href="http://ns3096228.ovh.net:8080/sparql?query="+query})();>EASYnear</a></p>
+
 <p>This chart
 <div align="center">
   <div id="sgvzl_example_query" data-sgvizler-endpoint="http://ns3096228.ovh.net:8080/sparql" data-sgvizler-query="SELECT ?subject (count(?d) as ?n) {?d <http://purl.org/dc/elements/1.1/subject> ?subject} GROUP BY ?subject ORDER BY DESC(?n) LIMIT 20" data-sgvizler-chart="gPieChart" data-sgvizler-loglevel="2" data-sgvizler-chart-options="backgroundColor=transparent|is3D=true|legend.textStyle.color=white" data-sgvizler-loglevel="2" style="width:600px; height:350px;"></div>
