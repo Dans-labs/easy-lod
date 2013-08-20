@@ -68,21 +68,21 @@ everything is likely to change.</p>
 <p>You can use the following example queries as a starting point for exploration of the data:</p>
 
 <ul>
-<li><a href="http://goo.gl/LPfBC">Top 20 subjects describing EASY datasets</a></li>
-<li><a href="http://goo.gl/UZpB4">Datasets around Maastricht</a></li>
-<li><a href="http://goo.gl/Qerku">Datasets around Maastricht, missing coverage metadata</a></li>
+<li><a href="http://goo.gl/mYdchU">Top 20 subjects describing EASY datasets</a></li>
+<li><a href="http://goo.gl/hR2fHg">Datasets around Maastricht</a></li>
+<li><a href="http://goo.gl/YuGvyu">Datasets around Maastricht, missing coverage metadata</a></li>
 </ul>
 
 <p>For datasets containing geographical coordinates in metadata you can use EASYnear bookmarklet 
 from the dataset page to get a list of 10 geographically close datasets. To install the bookmarklet drag
 this link 
-<a href="javascript:(function()%7Bvar%20query%3D%22SELECT%20%3Fdataset%20(SAMPLE(%3Ft)%20AS%20%3Ftitle)%20(STR(MIN(bif:st_distance(%3Fg,%20%3Fg2)))%20AS%20%3Fdistance_km)%20%7B%3CdatasetURI%3E%20geo:geometry%20%3Fg.%20%3Fdataset%20geo:geometry%20%3Fg2%3B%20dc:title%20%3Ft%20.%20FILTER(bif:st_intersects%20(%3Fg2,%20%3Fg,%2030))%7DGROUP%20BY%20%3Fdataset%20ORDER%20BY%20%3Fdistance_km%20LIMIT%2010%22%3Bquery%3DencodeURIComponent(query.replace(%22datasetURI%22,location.href.match(%22https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:%5B0-9%5D%2B%22)%5B0%5D))%3Blocation.href%3D%22http://ns3096228.ovh.net:8080/sparql%3Fquery%3D%22%2Bquery%7D)()%3B">EASYnear</a>
+<a href="javascript:(function()%7Bvar%20query%3D%22SELECT%20%3Fdataset%20(SAMPLE(%3Ft)%20AS%20%3Ftitle)%20(STR(MIN(bif:st_distance(%3Fg,%20%3Fg2)))%20AS%20%3Fdistance_km)%20%7B%3CdatasetURI%3E%20geo:geometry%20%3Fg.%20%3Fdataset%20geo:geometry%20%3Fg2%3B%20dc:title%20%3Ft%20.%20FILTER(bif:st_intersects%20(%3Fg2,%20%3Fg,%2030))%7DGROUP%20BY%20%3Fdataset%20ORDER%20BY%20%3Fdistance_km%20LIMIT%2010%22%3Bquery%3DencodeURIComponent(query.replace(%22datasetURI%22,location.href.match(%22https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:%5B0-9%5D%2B%22)%5B0%5D))%3Blocation.href%3D%22http://lod.cedar-project.nl:8080/sparql/easy%3Fquery%3D%22%2Bquery%7D)()%3B">EASYnear</a>
  to the bookmark bar in your browser.  
 </p>
 
 <p>This chart
 <div align="center">
-  <div id="sgvzl_example_query" data-sgvizler-endpoint="http://ns3096228.ovh.net:8080/sparql" data-sgvizler-query="SELECT ?subject (count(?d) as ?n) {?d <http://purl.org/dc/elements/1.1/subject> ?subject} GROUP BY ?subject ORDER BY DESC(?n) LIMIT 20" data-sgvizler-chart="gPieChart" data-sgvizler-loglevel="2" data-sgvizler-chart-options="backgroundColor=transparent|is3D=true|legend.textStyle.color=white" data-sgvizler-loglevel="2" style="width:600px; height:350px;"></div>
+  <div id="sgvzl_example_query" data-sgvizler-endpoint="http://lod.cedar-project.nl:8080/sparql/easy" data-sgvizler-query="SELECT ?subject (count(?d) as ?n) {?d <http://purl.org/dc/elements/1.1/subject> ?subject} GROUP BY ?subject ORDER BY DESC(?n) LIMIT 20" data-sgvizler-chart="gPieChart" data-sgvizler-loglevel="2" data-sgvizler-chart-options="backgroundColor=transparent|is3D=true|legend.textStyle.color=white" data-sgvizler-loglevel="2" style="width:600px; height:350px;"></div>
 </div>
 shows results of the "Top 20 subjects" query. The query is executed every time you load this page, so if you do not
 see a pie chart, this probably means that the SPARQL endpoint is down.
@@ -98,7 +98,7 @@ without authentication. The data is retrieved in <code>oai-dc</code> format and
 stored as n-triples using the same schema. Datasets are identified
 by the dataset URL (example: <code>https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:36192</code>).</p>
 
-<p>See <a href="http://github.com/cmarat/easy-lod/blob/master/dump.py">dump.py</a> for details.</p>
+<p>See <a href="http://github.com/dans-labs/easy-lod/blob/master/dump.py">dump.py</a> for details.</p>
 
 <h3>License</h3>
 
