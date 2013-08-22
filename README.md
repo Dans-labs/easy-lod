@@ -8,8 +8,7 @@ This is an experimental DANS-labs project, and as such may change without a nott
 
 ```
 pip install -r requirements.txt
-python dump.py
-python geo.py
+python easy-rdf.py
 ```
 
 ### More info
