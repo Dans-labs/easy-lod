@@ -8,7 +8,7 @@ This is an experimental DANS-labs project, and as such may change without a nott
 
 ```
 pip install -r requirements.txt
-python easy-rdf.py
+python easyrdf.py
 ```
 
 ### More info
