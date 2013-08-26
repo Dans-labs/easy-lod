@@ -48,12 +48,13 @@ def tranform(transformation, records):
 def limit(records, max_records=None):
     return itertools.islice(records, max_records)
 
+def easy_rdf():
+    return tranform(add_geo, oai_metadata('http://easy.dans.knaw.nl/oai/'))
+
 def dump_nt(records, filename, mode='w'):
     fout = open(filename, mode)
     for record in records:
         record.serialize(fout, format='nt')
 
-easy_rdf = tranform(add_geo, oai_metadata('http://easy.dans.knaw.nl/oai/'))
-
 if __name__ == '__main__':
-    dump_nt(easy_rdf, 'easy.nt')
+    dump_nt(easy_rdf(), 'easy.nt')
