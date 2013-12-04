@@ -2,7 +2,7 @@
 
 ### Status
 
-This is an experimental DANS-labs project, and as such may change without a nottice or even disappear completely. We do not advise to rely on it for any serious use (yet). Please drop a message to <marat.charlaganov@dans.knaw.nl> if you want to be notified about breaking changes.
+This is an experimental DANS-labs project, and as such may change without a notice or even disappear completely. We do not advise to rely on it for any serious use (yet). Please drop a message to <marat.charlaganov@dans.knaw.nl> if you want to be notified about breaking changes.
 
 ### Usage
 
