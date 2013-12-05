@@ -5,6 +5,10 @@ import rdflib
 from oaipmh.client import Client
 from oaipmh.metadata import MetadataRegistry, oai_dc_reader
 
+EASY_OAI = 'http://easy.dans.knaw.nl/oai/'
+EASY_SPARQL = 'http://localhost:8890/sparql'
+EASY_TARGET_GRAPH = 'https://easy.dans.knaw.nl'
+
 dc11 = rdflib.Namespace('http://purl.org/dc/elements/1.1/')
 geo = rdflib.Namespace('http://www.w3.org/2003/01/geo/wgs84_pos#')
 virtrdf = rdflib.Namespace('http://www.openlinksw.com/schemas/virtrdf#')
@@ -42,16 +46,37 @@ def add_geo(graph):
             graph.add((s, geo.geometry, rdflib.Literal(wkt_point, datatype=virtrdf.Geometry)))
     return graph
 
-def tranform(transformation, records):
-    return (transformation(r) for r in records)
+def easy_rdf(max_records=None):
+    easy_records = itertools.islice(oai_metadata(EASY_OAI), max_records)
+    return itertools.imap(add_geo, easy_records)
 
-def limit(records, max_records=None):
-    return itertools.islice(records, max_records)
+def update_query(graph, graph_name):
+    ntriples = graph.serialize(format='turtle')
+    return '''INSERT DATA {{ GRAPH <{0}> {{ {1} }} }}'''.format(graph_name, ntriples)
 
-def easy_rdf():
-    return tranform(add_geo, oai_metadata('http://easy.dans.knaw.nl/oai/'))
+def update_triplestore(records, sparql_endpoint_uri=EASY_SPARQL, graph_name=EASY_TARGET_GRAPH):
+    """
+    Save records to triplestore
+
+    :param records: iterable of rdflib.Graph objects
+    :param sparql_endpoint_uri: SPARQL Update endpoint
+    :type sparql_endpoint_uri: str
+    :param graph_name: target graph name
+    :type graph_name: str
+    """
+    target_graph = rdflib.Graph(store='SPARQLUpdateStore', identifier=graph_name)
+    target_graph.open((sparql_endpoint_uri, sparql_endpoint_uri), create=False)
+    for record in records:
+        target_graph.update(update_query(record, graph_name))
 
 def dump_nt(records, filename, mode='w'):
+    """
+    Save records to disk in N-Triples format
+
+    :param records: iterable of rdflib.Graph objects
+    :param filename: output file name
+    :param mode: file open mode
+    """
     fout = open(filename, mode)
     for record in records:
         record.serialize(fout, format='nt')
