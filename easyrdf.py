@@ -7,7 +7,7 @@ from oaipmh.client import Client
 from oaipmh.metadata import MetadataRegistry, oai_dc_reader
 
 EASY_OAI = 'http://easy.dans.knaw.nl/oai/'
-EASY_SPARQL = 'http://localhost:8890/sparql'
+EASY_SPARQL = 'http://localhost:8890/sparql/update'
 EASY_TARGET_GRAPH = 'https://easy.dans.knaw.nl'
 
 dc11 = rdflib.Namespace('http://purl.org/dc/elements/1.1/')
@@ -89,6 +89,12 @@ def update_triplestore(records, sparql_endpoint_uri=EASY_SPARQL, graph_name=EASY
         raise ValueError("clean_type parameter must be 'all', 'incremental', or 'none'")
     for record in records:
         target_graph.update(update_query(record, graph_name, delete_subject=record.identifier))
+
+def easy_reload():
+    """
+    Reload data into triplestore using default parameters.
+    """
+    update_triplestore(easy_rdf(), clean_type='all')
 
 def dump_nt(records, filename, mode='w'):
     """
