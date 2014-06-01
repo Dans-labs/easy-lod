@@ -82,7 +82,8 @@ def update_triplestore(records, sparql_endpoint_uri=EASY_SPARQL, graph_name=EASY
     target_graph.open((sparql_endpoint_uri, sparql_endpoint_uri), create=False)
     delete_subject_getter = lambda: None
     if clean_type == 'all':
-        target_graph.update('''DROP SILENT GRAPH <{}>'''.format(graph_name))
+        drop_query = '''DROP SILENT GRAPH <{}>'''.format(graph_name)
+        target_graph.update(drop_query)
     elif clean_type == 'incremental':
         delete_subject_getter = lambda: record.identifier
     elif clean_type and (clean_type != 'none'):
