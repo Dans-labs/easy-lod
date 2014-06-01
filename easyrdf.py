@@ -15,6 +15,7 @@ geo = rdflib.Namespace('http://www.w3.org/2003/01/geo/wgs84_pos#')
 virtrdf = rdflib.Namespace('http://www.openlinksw.com/schemas/virtrdf#')
 easy_id = rdflib.Namespace('https://easy.dans.knaw.nl/ui/datasets/id/easy-dataset:')
 
+
 def easy_url(oai_id):
     namespace, dataset = oai_id.rsplit(':', 1)
     if namespace != 'oai:easy.dans.knaw.nl:easy-dataset':
@@ -54,6 +55,31 @@ def easy_rdf(max_records=None, from_datetime=None):
     easy_records = itertools.islice(oai_metadata(EASY_OAI, from_datetime=from_datetime  ), max_records)
     return itertools.imap(add_geo, easy_records)
 
+def update_void_query(xsd_date=None):
+    modified = xsd_date or rdflib.Literal(datetime.date(datetime.now())).n3()
+    return ur'''
+        WITH <https://easy.dans.knaw.nl>
+        DELETE {{ ?void ?p ?v }}
+        WHERE {{
+            ?void   a void:Dataset;
+                    foaf:homepage <http://easy.dans.knaw.nl/>;
+                    ?p ?v . 
+        }};
+
+        INSERT {{
+        GRAPH <https://easy.dans.knaw.nl> {{
+            _:void <http://xmlns.com/foaf/0.1/page> <http://dans-labs.github.io/easy-lod/> .
+            _:void <http://purl.org/dc/terms/creator> "Marat Charlaganov" .
+            _:void <http://purl.org/dc/terms/contributor> <http://www.wikidata.org/wiki/Q13570995> .
+            _:void <http://purl.org/dc/terms/title> "EASY metadata" .
+            _:void <http://rdfs.org/ns/void#sparqlEndpoint> <http://lod.cedar-project.nl:8080/sparql/easy> .
+            _:void <http://purl.org/dc/terms/license> <http://opendatacommons.org/licenses/odbl/1.0/> .
+            _:void <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/ns/void#Dataset> .
+            _:void <http://purl.org/dc/terms/description> "RDF representation of EASY metadata" .
+            _:void <http://xmlns.com/foaf/0.1/homepage> <http://easy.dans.knaw.nl/> .
+            _:void <http://purl.org/dc/terms/modified> {0} .
+        }} }};'''.format(modified)
+
 def update_query(graph, graph_name, delete_subject=None):
     ntriples = graph.serialize(format='nt')
     if delete_subject:
@@ -80,6 +106,7 @@ def update_triplestore(records, sparql_endpoint_uri=EASY_SPARQL, graph_name=EASY
     """
     target_graph = rdflib.Graph(store='SPARQLUpdateStore', identifier=graph_name)
     target_graph.open((sparql_endpoint_uri, sparql_endpoint_uri), create=False)
+    target_graph.update(update_void_query())
     delete_subject_getter = lambda: None
     if clean_type == 'all':
         drop_query = '''DROP SILENT GRAPH <{}>'''.format(graph_name)
@@ -89,11 +116,17 @@ def update_triplestore(records, sparql_endpoint_uri=EASY_SPARQL, graph_name=EASY
     elif clean_type and (clean_type != 'none'):
         raise ValueError("clean_type parameter must be 'all', 'incremental', or 'none'")
     for record in records:
-        target_graph.update(update_query(record, graph_name, delete_subject=record.identifier))
+        target_graph.update(update_query(record, graph_name, delete_subject=delete_subject_getter()))
 
 def easy_reload():
     """
-    Reload data into triplestore using default parameters.
+    Reload EASY metadata into triplestore using default parameters.
+    """
+    update_triplestore(easy_rdf(), clean_type='all')
+
+def easy_refresh_from_datetime(from_datetime=None):
+    """
+    Reload EASY metadata into triplestore using default parameters.
     """
     update_triplestore(easy_rdf(), clean_type='all')
 
